@@ -21,3 +21,11 @@ Additionally, you need swt.jar added to your build path. Download the matching v
 ## Release Notes
 
 Please read [Release Notes](https://github.com/LibreOffice/noa-libre/releases/tag/v3.0.0) if you are upgrading from older versions of NOA-libre
+
+
+## FORK
+
+This is a fork heaving this wonderful project into Maven universe.
+SWT becomes an optional dependency, may be used with IDesktopServiceSWT / DesktopServiceSWT.
+
+
