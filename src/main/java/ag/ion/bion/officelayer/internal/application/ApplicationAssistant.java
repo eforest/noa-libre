@@ -26,9 +26,8 @@ package ag.ion.bion.officelayer.internal.application;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -39,11 +38,6 @@ import ag.ion.bion.officelayer.application.ILazyApplicationInfo;
 import ag.ion.bion.officelayer.application.IOfficeApplication;
 import ag.ion.bion.officelayer.application.OfficeApplicationException;
 import ag.ion.bion.officelayer.runtime.IOfficeProgressMonitor;
-
-import com.ice.jni.registry.NoSuchValueException;
-import com.ice.jni.registry.Registry;
-import com.ice.jni.registry.RegistryKey;
-import java.io.IOException;
 
 /**
  * Assistant for office applications.
@@ -320,86 +314,87 @@ public class ApplicationAssistant implements IApplicationAssistant {
             }
         } else if (OSHelper.IS_WINDOWS) {
             try {
-                String[] possibleOpenOfficeOrgKeys = getPossibleKeys(KEY_MAIN_PART_OPEN_OFFICE_ORG);
-                String[] possibleOpenOfficeKeys = getPossibleKeys(KEY_MAIN_PART_OPEN_OFFICE);
-                String[] possibleLibreOfficeKeys = getPossibleKeys(KEY_MAIN_PART_LIBRE_OFFICE);
-                List keys = new ArrayList();
-                keys.addAll(Arrays.asList(possibleOpenOfficeOrgKeys));
-                keys.addAll(Arrays.asList(possibleOpenOfficeKeys));
-                keys.addAll(Arrays.asList(possibleLibreOfficeKeys));
-                String[] possibleKeys = (String[]) keys.toArray(new String[keys
-                        .size()]);
-                if (officeProgressMonitor != null) {
-                    officeProgressMonitor
-                            .beginTask(
-                            Messages.getString("ApplicationAssistant.monitor_message_scannig_registry"), possibleKeys.length); //$NON-NLS-1$
-                }
-                RegistryKey[] ROOTS = new RegistryKey[]{
-                    Registry.HKEY_CLASSES_ROOT, Registry.HKEY_CURRENT_USER,
-                    Registry.HKEY_LOCAL_MACHINE};
-                for (int i = 0, n = possibleKeys.length; i < n; i++) {
-                    if (officeProgressMonitor != null) {
-                        officeProgressMonitor
-                                .beginSubTask(Messages
-                                .getString(
-                                "ApplicationAssistant.monitor_scanning_key", possibleKeys[i])); //$NON-NLS-1$
-                    }
-                    for (int j = 0; j < ROOTS.length; j++) {
-                        RegistryKey registryKey = Registry.openSubkey(ROOTS[j],
-                                possibleKeys[i], RegistryKey.ACCESS_READ);
-                        //System.out.println(possibleKeys[i]);
-                        if (registryKey != null) {
-
-                            String path = null;
-                            if (path == null) {
-                                try {
-                                    path = registryKey.getStringValue("Path");
-                                    path = "\"" + path + "\"";
-                                } catch (NoSuchValueException noSuchValueException) {
-                                    // ignore
-                                }
-                            }
-                            if (path == null) {
-                                try {
-                                    path = registryKey.getDefaultValue();
-                                } catch (NoSuchValueException noSuchValueException) {
-                                    // ignore
-                                }
-                            }
-                            if (path != null) {
-                                int position = path
-                                        .indexOf(APPLICATION_EXECUTEABLE);
-                                if (position != -1) {
-                                    path = path.substring(1, position - 9);
-                                    ILazyApplicationInfo applicationInfo = findLocalApplicationInfo(path);
-                                    if (applicationInfo != null) {
-                                        boolean found = false;
-                                        for (Iterator iterator = arrayList
-                                                .iterator(); iterator.hasNext();) {
-                                            ILazyApplicationInfo tmpApplicationInfo = (ILazyApplicationInfo) iterator
-                                                    .next();
-                                            if (tmpApplicationInfo.getHome()
-                                                    .equalsIgnoreCase(
-                                                    applicationInfo
-                                                    .getHome())) {
-                                                found = true;
-                                                break;
-                                            }
-                                        }
-                                        if (!found) {
-                                            arrayList.add(applicationInfo);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (officeProgressMonitor != null) {
-                        if (officeProgressMonitor.isCanceled()) {
-                            break;
-                        }
-                    }
-                }
+                // TODO reimplement with https://github.com/sarxos/win-registry
+//                String[] possibleOpenOfficeOrgKeys = getPossibleKeys(KEY_MAIN_PART_OPEN_OFFICE_ORG);
+//                String[] possibleOpenOfficeKeys = getPossibleKeys(KEY_MAIN_PART_OPEN_OFFICE);
+//                String[] possibleLibreOfficeKeys = getPossibleKeys(KEY_MAIN_PART_LIBRE_OFFICE);
+//                List keys = new ArrayList();
+//                keys.addAll(Arrays.asList(possibleOpenOfficeOrgKeys));
+//                keys.addAll(Arrays.asList(possibleOpenOfficeKeys));
+//                keys.addAll(Arrays.asList(possibleLibreOfficeKeys));
+//                String[] possibleKeys = (String[]) keys.toArray(new String[keys
+//                        .size()]);
+//                if (officeProgressMonitor != null) {
+//                    officeProgressMonitor
+//                            .beginTask(
+//                            Messages.getString("ApplicationAssistant.monitor_message_scannig_registry"), possibleKeys.length); //$NON-NLS-1$
+//                }
+//                RegistryKey[] ROOTS = new RegistryKey[]{
+//                    Registry.HKEY_CLASSES_ROOT, Registry.HKEY_CURRENT_USER,
+//                    Registry.HKEY_LOCAL_MACHINE};
+//                for (int i = 0, n = possibleKeys.length; i < n; i++) {
+//                    if (officeProgressMonitor != null) {
+//                        officeProgressMonitor
+//                                .beginSubTask(Messages
+//                                .getString(
+//                                "ApplicationAssistant.monitor_scanning_key", possibleKeys[i])); //$NON-NLS-1$
+//                    }
+//                    for (int j = 0; j < ROOTS.length; j++) {
+//                        RegistryKey registryKey = Registry.openSubkey(ROOTS[j],
+//                                possibleKeys[i], RegistryKey.ACCESS_READ);
+//                        //System.out.println(possibleKeys[i]);
+//                        if (registryKey != null) {
+//
+//                            String path = null;
+//                            if (path == null) {
+//                                try {
+//                                    path = registryKey.getStringValue("Path");
+//                                    path = "\"" + path + "\"";
+//                                } catch (NoSuchValueException noSuchValueException) {
+//                                    // ignore
+//                                }
+//                            }
+//                            if (path == null) {
+//                                try {
+//                                    path = registryKey.getDefaultValue();
+//                                } catch (NoSuchValueException noSuchValueException) {
+//                                    // ignore
+//                                }
+//                            }
+//                            if (path != null) {
+//                                int position = path
+//                                        .indexOf(APPLICATION_EXECUTEABLE);
+//                                if (position != -1) {
+//                                    path = path.substring(1, position - 9);
+//                                    ILazyApplicationInfo applicationInfo = findLocalApplicationInfo(path);
+//                                    if (applicationInfo != null) {
+//                                        boolean found = false;
+//                                        for (Iterator iterator = arrayList
+//                                                .iterator(); iterator.hasNext();) {
+//                                            ILazyApplicationInfo tmpApplicationInfo = (ILazyApplicationInfo) iterator
+//                                                    .next();
+//                                            if (tmpApplicationInfo.getHome()
+//                                                    .equalsIgnoreCase(
+//                                                    applicationInfo
+//                                                    .getHome())) {
+//                                                found = true;
+//                                                break;
+//                                            }
+//                                        }
+//                                        if (!found) {
+//                                            arrayList.add(applicationInfo);
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                    if (officeProgressMonitor != null) {
+//                        if (officeProgressMonitor.isCanceled()) {
+//                            break;
+//                        }
+//                    }
+//                }
             } catch (Throwable throwable) {
                 return ILazyApplicationInfo.EMPTY_LAZY_APPLICATION_INFOS_ARRAY;
             }
