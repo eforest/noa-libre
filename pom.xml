@@ -39,10 +39,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
 		<version.libreoffice>7.3.2</version.libreoffice>
-		
-		<registry.lib.path>${basedir}</registry.lib.path>
 	</properties>
 
 	<dependencies>
@@ -63,7 +60,7 @@
 			<artifactId>officebean</artifactId>
 			<version>${version.libreoffice}</version>
 		</dependency>
-	
+
 
 		<dependency>
 			<groupId>org.eclipse.swt.org.eclipse.swt.win32.win32.x86_64.4.3.swt</groupId>
@@ -73,12 +70,11 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.10</version>
-		    <scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
 		</dependency>
-
 
 	</dependencies>
 
@@ -135,7 +131,26 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M6</version>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>skipTests</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- you need lot's of local infrastructure to run these tests, so by default we're skipping execution -->
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
