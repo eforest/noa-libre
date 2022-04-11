@@ -36,14 +36,14 @@
  */
 package ag.ion.noa.internal.db;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.noa.db.IDatabaseDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.lang.XComponent;
 import com.sun.star.sdb.XOfficeDatabaseDocument;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.noa.db.IDatabaseDocument;
 
 /**
  * OpenOffice.org database document.
@@ -54,69 +54,63 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class DatabaseDocument extends AbstractDocument implements IDatabaseDocument {
 
-  private XOfficeDatabaseDocument xOfficeDatabaseDocument = null;
+    private XOfficeDatabaseDocument xOfficeDatabaseDocument = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new DatabaseDocument.
-   * 
-   * @param xOfficeDatabaseDocument XOfficeDatabaseDocument OpenOffice.org interface to 
-   * be used
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @author Andreas Bröker
-   * @date 16.03.2006
-   */
-  public DatabaseDocument(XOfficeDatabaseDocument xOfficeDatabaseDocument,
-      PropertyValue[] initialProperties) {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xOfficeDatabaseDocument),
-        initialProperties);
-    this.xOfficeDatabaseDocument = xOfficeDatabaseDocument;
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Returns XOfficeDatabaseDocument OpenOffice.org interface.
-   * 
-   * @return XOfficeDatabaseDocument OpenOffice.org interface
-   * 
-   * @author Andreas Bröker
-   * @date 16.03.2006
-   */
-  public XOfficeDatabaseDocument getOfficeDatabaseDocument() {
-    return xOfficeDatabaseDocument;
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   * @date 16.03.2006
-   */
-  public String getDocumentType() {
-    return IDocument.BASE;
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Closes the document.
-   * 
-   * @author Andreas Bröker
-   * @date 20.03.2006
-   */
-  public void close() {
-    removeDocumentListeners();
-    removeModifyListeners();
+    // ----------------------------------------------------------------------------
     /**
-     * The nanuallay call of the garbage collection was added in order to stabilize
-     * OpenOffice.org. Maybe the calls can be removed later.
+     * Constructs new DatabaseDocument.
+     * 
+     * @param xOfficeDatabaseDocument XOfficeDatabaseDocument OpenOffice.org interface to be used
+     * @param initialProperties the properties that were used loading the document
+     * @author Andreas Bröker
+     * @date 16.03.2006
      */
-    System.gc();
-    removeCloseListeners();
-  }
-  //----------------------------------------------------------------------------
+    public DatabaseDocument(XOfficeDatabaseDocument xOfficeDatabaseDocument, PropertyValue[] initialProperties) {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xOfficeDatabaseDocument ), initialProperties );
+        this.xOfficeDatabaseDocument = xOfficeDatabaseDocument;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns XOfficeDatabaseDocument OpenOffice.org interface.
+     * 
+     * @return XOfficeDatabaseDocument OpenOffice.org interface
+     * @author Andreas Bröker
+     * @date 16.03.2006
+     */
+    public XOfficeDatabaseDocument getOfficeDatabaseDocument() {
+        return xOfficeDatabaseDocument;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     * @date 16.03.2006
+     */
+    public String getDocumentType() {
+        return IDocument.BASE;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Closes the document.
+     * 
+     * @author Andreas Bröker
+     * @date 20.03.2006
+     */
+    public void close() {
+        removeDocumentListeners();
+        removeModifyListeners();
+        /**
+         * The nanuallay call of the garbage collection was added in order to stabilize OpenOffice.org. Maybe the calls
+         * can be removed later.
+         */
+        System.gc();
+        removeCloseListeners();
+    }
+    // ----------------------------------------------------------------------------
 
 }

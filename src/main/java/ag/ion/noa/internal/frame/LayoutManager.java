@@ -36,13 +36,13 @@
  */
 package ag.ion.noa.internal.frame;
 
-import ag.ion.bion.officelayer.util.Assert;
-import ag.ion.noa.frame.ILayoutManager;
-
 import com.sun.star.beans.XPropertySet;
 import com.sun.star.frame.XLayoutManager;
 import com.sun.star.ui.XUIElement;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.util.Assert;
+import ag.ion.noa.frame.ILayoutManager;
 
 /**
  * Layout manager for frames.
@@ -54,170 +54,154 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class LayoutManager implements ILayoutManager {
 
-  private XLayoutManager xLayoutManager = null;
+    private XLayoutManager xLayoutManager = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new LayoutManager.
-   * 
-   * @param xLayoutManager office XLayoutManager interface
-   * 
-   * @author Andreas Bröker
-   * @date 2006/02/05
-   */
-  public LayoutManager(XLayoutManager xLayoutManager) {
-    Assert.isNotNull(xLayoutManager, XLayoutManager.class, this);
-    this.xLayoutManager = xLayoutManager;
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Returns the office XLayoutManager interface.
-   * 
-   * @return office XLayoutManager interface
-   * 
-   * @author Andreas Bröker
-   * @date 2006/02/05
-   */
-  public XLayoutManager getXLayoutManager() {
-    return xLayoutManager;
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Shows UI element with the submitted resource URL.
-   * Automatically perist changes.
-   * 
-   * @param resourceURL URL of the UI resource to be shown
-   * 
-   * @return information whether the UI resource is visible after method call
-   * 
-   * @author Andreas Bröker
-   * @date 2006/02/05
-   */
-  public boolean hideElement(String resourceURL) {
-    return hideElement(resourceURL, true);
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Hide UI element with the submitted resource URL.
-   * 
-   * @param resourceURL URL of the UI resource to be hidden
-   * @param if changes should be persistent
-   * 
-   * @return information whether the UI resource is hidden after method call
-   * 
-   * @author Markus Krüger
-   * @date 06.05.2010
-   */
-  public boolean hideElement(String resourceURL, boolean persistent) {
-    if (resourceURL != null) {
-      try {
-        XUIElement element = xLayoutManager.getElement(resourceURL);
-        if (element != null) {
-          XPropertySet xps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class, element);
-          xps.setPropertyValue("Persistent", new Boolean(persistent));
-          return xLayoutManager.hideElement(resourceURL);
-        }
-      }
-      catch (Exception e) {
-        //ignore and return false
-      }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new LayoutManager.
+     * 
+     * @param xLayoutManager office XLayoutManager interface
+     * @author Andreas Bröker
+     * @date 2006/02/05
+     */
+    public LayoutManager(XLayoutManager xLayoutManager) {
+        Assert.isNotNull( xLayoutManager, XLayoutManager.class, this );
+        this.xLayoutManager = xLayoutManager;
     }
-    return false;
 
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Hides all bars.
-   * Automatically perist changes.
-   * 
-   * @author Markus Krüger
-   * @date 08.12.2006
-   */
-  public void hideAll() {
-    hideAll(true);
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Hides all bars.
-   * 
-   * @param if changes should be persistent
-   * 
-   * @author Markus Krüger
-   * @date 06.05.2010
-   */
-  public void hideAll(boolean persistent) {
-    for (int i = 0; i < ALL_BARS_URLS.length; i++) {
-      hideElement(ALL_BARS_URLS[i], persistent);
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns the office XLayoutManager interface.
+     * 
+     * @return office XLayoutManager interface
+     * @author Andreas Bröker
+     * @date 2006/02/05
+     */
+    public XLayoutManager getXLayoutManager() {
+        return xLayoutManager;
     }
-  }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Shows UI element with the submitted resource URL.
-   * Automatically perist changes.
-   * 
-   * @param resourceURL URL of the UI resource to be shown
-   * 
-   * @return information whether the UI resource is visible after method call
-   * 
-   * @author Andreas Bröker
-   * @date 2006/02/05
-   */
-  public boolean showElement(String resourceURL) {
-    return showElement(resourceURL, true);
-  }
-
-  //----------------------------------------------------------------------------
-  /**
-   * Shows UI element with the submitted resource URL.
-   * 
-   * @param resourceURL URL of the UI resource to be shown
-   * @param if changes should be persistent
-   * 
-   * @return information whether the UI resource is visible after method call
-   * 
-   * @author Markus Krüger
-   * @date 06.05.2010
-   */
-  public boolean showElement(String resourceURL, boolean persistent) {
-    if (resourceURL != null) {
-      try {
-        XUIElement element = xLayoutManager.getElement(resourceURL);
-        if (element == null) {
-          xLayoutManager.createElement(resourceURL);
-        }
-        element = xLayoutManager.getElement(resourceURL);
-        if (element != null) {
-          XPropertySet xps = (XPropertySet) UnoRuntime.queryInterface(XPropertySet.class, element);
-          xps.setPropertyValue("Persistent", new Boolean(persistent));
-          return xLayoutManager.showElement(resourceURL);
-        }
-      }
-      catch (Exception e) {
-        //ignore and return false
-      }
+    // ----------------------------------------------------------------------------
+    /**
+     * Shows UI element with the submitted resource URL. Automatically perist changes.
+     * 
+     * @param resourceURL URL of the UI resource to be shown
+     * @return information whether the UI resource is visible after method call
+     * @author Andreas Bröker
+     * @date 2006/02/05
+     */
+    public boolean hideElement(String resourceURL) {
+        return hideElement( resourceURL, true );
     }
-    return false;
-  }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Switches the visibility of all UI elements managed by the 
-   * layout manager.
-   * 
-   * @param visible new visibility state
-   * 
-   * @author Andreas Bröker
-   * @date 2006/02/05
-   */
-  public void setVisible(boolean visible) {
-    xLayoutManager.setVisible(visible);
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Hide UI element with the submitted resource URL.
+     * 
+     * @param resourceURL URL of the UI resource to be hidden
+     * @param persistent if changes should be persistent
+     * @return information whether the UI resource is hidden after method call
+     * @author Markus Krüger
+     * @date 06.05.2010
+     */
+    public boolean hideElement(String resourceURL, boolean persistent) {
+        if ( resourceURL != null ) {
+            try {
+                XUIElement element = xLayoutManager.getElement( resourceURL );
+                if ( element != null ) {
+                    XPropertySet xps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, element );
+                    xps.setPropertyValue( "Persistent", new Boolean( persistent ) );
+                    return xLayoutManager.hideElement( resourceURL );
+                }
+            }
+            catch ( Exception e ) {
+                // ignore and return false
+            }
+        }
+        return false;
+
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Hides all bars. Automatically perist changes.
+     * 
+     * @author Markus Krüger
+     * @date 08.12.2006
+     */
+    public void hideAll() {
+        hideAll( true );
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Hides all bars.
+     * 
+     * @param persistent if changes should be persistent
+     * @author Markus Krüger
+     * @date 06.05.2010
+     */
+    public void hideAll(boolean persistent) {
+        for ( int i = 0; i < ALL_BARS_URLS.length; i++ ) {
+            hideElement( ALL_BARS_URLS[i], persistent );
+        }
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Shows UI element with the submitted resource URL. Automatically perist changes.
+     * 
+     * @param resourceURL URL of the UI resource to be shown
+     * @return information whether the UI resource is visible after method call
+     * @author Andreas Bröker
+     * @date 2006/02/05
+     */
+    public boolean showElement(String resourceURL) {
+        return showElement( resourceURL, true );
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Shows UI element with the submitted resource URL.
+     * 
+     * @param resourceURL URL of the UI resource to be shown
+     * @param persistent if changes should be persistent
+     * @return information whether the UI resource is visible after method call
+     * @author Markus Krüger
+     * @date 06.05.2010
+     */
+    public boolean showElement(String resourceURL, boolean persistent) {
+        if ( resourceURL != null ) {
+            try {
+                XUIElement element = xLayoutManager.getElement( resourceURL );
+                if ( element == null ) {
+                    xLayoutManager.createElement( resourceURL );
+                }
+                element = xLayoutManager.getElement( resourceURL );
+                if ( element != null ) {
+                    XPropertySet xps = (XPropertySet) UnoRuntime.queryInterface( XPropertySet.class, element );
+                    xps.setPropertyValue( "Persistent", new Boolean( persistent ) );
+                    return xLayoutManager.showElement( resourceURL );
+                }
+            }
+            catch ( Exception e ) {
+                // ignore and return false
+            }
+        }
+        return false;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Switches the visibility of all UI elements managed by the layout manager.
+     * 
+     * @param visible new visibility state
+     * @author Andreas Bröker
+     * @date 2006/02/05
+     */
+    public void setVisible(boolean visible) {
+        xLayoutManager.setVisible( visible );
+    }
+    // ----------------------------------------------------------------------------
 
 }

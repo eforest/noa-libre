@@ -38,14 +38,14 @@
  */
 package ag.ion.bion.officelayer.internal.formula;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.formula.IFormulaDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.beans.XPropertySet;
 import com.sun.star.lang.XComponent;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.formula.IFormulaDocument;
 
 /**
  * OpenOffice.org formula document representation.
@@ -56,58 +56,54 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class FormulaDocument extends AbstractDocument implements IFormulaDocument {
 
-  private XPropertySet xPropertySet = null;
+    private XPropertySet xPropertySet = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new OpenOffice.org formula document.
-   * 
-   * @param xPropertySet OpenOffice.org API interface of a formula document
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
-   * 
-   * @author Andreas Bröker
-   */
-  public FormulaDocument(XPropertySet xPropertySet, PropertyValue[] initialProperties)
-      throws IllegalArgumentException {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xPropertySet), initialProperties);
-    this.xPropertySet = xPropertySet;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org formula document.
+     * 
+     * @param xPropertySet OpenOffice.org API interface of a formula document
+     * @param initialProperties the properties that were used loading the document
+     * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
+     * @author Andreas Bröker
+     */
+    public FormulaDocument(XPropertySet xPropertySet, PropertyValue[] initialProperties)
+        throws IllegalArgumentException {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xPropertySet ), initialProperties );
+        this.xPropertySet = xPropertySet;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns OpenOffice.org XPropertySet interface.
-   * 
-   * @return OpenOffice.org XPropertySet interface
-   * 
-   * @author Andreas Bröker
-   */
-  public XPropertySet getPropertySet() {
-    return xPropertySet;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org XPropertySet interface.
+     * 
+     * @return OpenOffice.org XPropertySet interface
+     * @author Andreas Bröker
+     */
+    public XPropertySet getPropertySet() {
+        return xPropertySet;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.MATH;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.MATH;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Reformats the document.
-   * 
-   * @author Markus Krüger
-   */
-  public void reformat() {
-    //TODO fill with logic
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Reformats the document.
+     * 
+     * @author Markus Krüger
+     */
+    public void reformat() {
+        // TODO fill with logic
+    }
+    // ----------------------------------------------------------------------------
 
 }

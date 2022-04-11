@@ -376,8 +376,8 @@ public class LocalOfficeConnectionGhost implements OfficeConnection {
     // ----------------------------------------------------------------------------
     /**
      * Constructs new LocalOfficeConnectionGhost. Sets up paths to the office application and native libraries if values
-     * are available in <code>OFFICE_PROP_FILE</code> in the user home directory.<br />
-     * "com.sun.star.beans.path" - the office application directory;<br/>
+     * are available in <code>OFFICE_PROP_FILE</code> in the user home directory.<br>
+     * "com.sun.star.beans.path" - the office application directory;<br>
      * "com.sun.star.beans.libpath" - native libraries directory.
      * 
      * @param officeProgressMonitor office progress monitor to be used (can be null)
@@ -398,7 +398,7 @@ public class LocalOfficeConnectionGhost implements OfficeConnection {
 
     // ----------------------------------------------------------------------------
     /**
-     * Sets a connection URL. This implementation accepts a UNO URL with following format:<br />
+     * Sets a connection URL. This implementation accepts a UNO URL with following format:<br>
      * 
      * <pre>
      *  url    := uno:localoffice[,&lt;params&gt;];urp;StarOffice.ServiceManager
@@ -497,7 +497,6 @@ public class LocalOfficeConnectionGhost implements OfficeConnection {
      * Creates an office window. The window is either a sub-class of java.awt.Canvas (local) or java.awt.Container
      * (RVP).
      * 
-     * @param container this is an AWT container
      * @return the office window instance
      * @author Andreas Bröker
      */

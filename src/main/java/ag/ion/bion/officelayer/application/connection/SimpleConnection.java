@@ -221,7 +221,6 @@ public class SimpleConnection {
      * 
      * @param path The path where the OO installation resides
      * @param port The port the server shall listen to
-     * @throws IOException
      */
     public synchronized static void startOOServerIfNotRunning(final String path, final int port) {
         final Properties props = System.getProperties();

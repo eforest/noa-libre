@@ -32,7 +32,7 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
@@ -48,103 +48,92 @@ import ag.ion.bion.officelayer.beans.IProperties;
  * @version $Revision: 10398 $
  */
 public interface ITextTableCellProperties extends IPropertyDescriptionElement, IProperties {
-  
-  /** type id of this property **/
-  public static final String TYPE_ID = "ag.ion.bion.officelayer.text.TextTableCellProperties";
-  
-	public static final short ALIGN_UNDEFINED	= 0;
-	public static final short ALIGN_CENTER		= 1;
-	public static final short ALIGN_TOP				= 2;
-	public static final short ALIGN_BOTTOM		= 3;
-	
-  //----------------------------------------------------------------------------
-  /**
-   * Sets style of the cell.
-   * 
-   * @param cellStyle style of the cell
-   * 
-   * @throws TextException if the property can not be modified
-   * 
-   * @author Andreas Bröker
-   */
-  public void setCellStyle(String cellStyle) throws TextException;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns style of the cell.
-   * 
-   * @return style of the cell
-   * 
-   * @throws TextException if the property is not available
-   */
-  public String getCellStyle() throws TextException;  
-  //----------------------------------------------------------------------------
-  /**
-   * Sets number format.
-   * 
-   * @param numberFormat number format
-   * 
-   * @throws TextException if the property can not be modified
-   * 
-   * @author Andreas Bröker
-   */
-  public void setNumberFormat(int numberFormat) throws TextException;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns number format.
-   * 
-   * @return number format
-   * 
-   * @throws TextException if the property is not available
-   * 
-   * @author Andreas Bröker
-   */
-  public int getNumberFormat() throws TextException;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns the cell background color.
-   * 
-   * @return cell background color
-   * 
-   * @throws TextException if the property is not available
-   * 
-   * @author Miriam Sutter
-   */
-  public int getBackColor() throws TextException;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns the vertical alignment.
-   * 
-   * @return vertical alignment
-   * 
-   * @throws TextException if the property is not available
-   * 
-   * @author Miriam Sutter
-   */
-  public short getVertOrient() throws TextException;
-  //----------------------------------------------------------------------------
 
-  /**
-   * Sets the CellBackColor, this overwrites previously stored
-   * values.
-   * 
-   * @param cell background color
-   * 
-   * @throws TextException if the property is not available
-   * 
-   * @author Sebastian Rösgen
-   */
-  public void setBackColor(int color) throws TextException;
-  //----------------------------------------------------------------------------
-  /**
-   * Sets the vertical alignment in the cell, this overwrites previously
-   * stored values.
-   * 
-   * @param vertical alignment
-   * 
-   * @throws TextException if the property is not available
-   * 
-   * @author Sebastian Rösgen
-   */
-  public void setVertOrient(short align) throws TextException;
-  //----------------------------------------------------------------------------
+    /** type id of this property **/
+    public static final String TYPE_ID = "ag.ion.bion.officelayer.text.TextTableCellProperties";
+
+    public static final short ALIGN_UNDEFINED = 0;
+    public static final short ALIGN_CENTER = 1;
+    public static final short ALIGN_TOP = 2;
+    public static final short ALIGN_BOTTOM = 3;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets style of the cell.
+     * 
+     * @param cellStyle style of the cell
+     * @throws TextException if the property can not be modified
+     * @author Andreas Bröker
+     */
+    public void setCellStyle(String cellStyle) throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns style of the cell.
+     * 
+     * @return style of the cell
+     * @throws TextException if the property is not available
+     */
+    public String getCellStyle() throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets number format.
+     * 
+     * @param numberFormat number format
+     * @throws TextException if the property can not be modified
+     * @author Andreas Bröker
+     */
+    public void setNumberFormat(int numberFormat) throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns number format.
+     * 
+     * @return number format
+     * @throws TextException if the property is not available
+     * @author Andreas Bröker
+     */
+    public int getNumberFormat() throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns the cell background color.
+     * 
+     * @return cell background color
+     * @throws TextException if the property is not available
+     * @author Miriam Sutter
+     */
+    public int getBackColor() throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns the vertical alignment.
+     * 
+     * @return vertical alignment
+     * @throws TextException if the property is not available
+     * @author Miriam Sutter
+     */
+    public short getVertOrient() throws TextException;
+    // ----------------------------------------------------------------------------
+
+    /**
+     * Sets the CellBackColor, this overwrites previously stored values.
+     * 
+     * @param color cell background color
+     * @throws TextException if the property is not available
+     * @author Sebastian Rösgen
+     */
+    public void setBackColor(int color) throws TextException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the vertical alignment in the cell, this overwrites previously stored values.
+     * 
+     * @param align vertical alignment
+     * @throws TextException if the property is not available
+     * @author Sebastian Rösgen
+     */
+    public void setVertOrient(short align) throws TextException;
+    // ----------------------------------------------------------------------------
 }

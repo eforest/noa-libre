@@ -38,14 +38,14 @@
  */
 package ag.ion.bion.officelayer.internal.draw;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.draw.IDrawingDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.drawing.XDrawPagesSupplier;
 import com.sun.star.lang.XComponent;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.draw.IDrawingDocument;
 
 /**
  * OpenOffice.org drawing document representation.
@@ -56,59 +56,54 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class DrawingDocument extends AbstractDocument implements IDrawingDocument {
 
-  private XDrawPagesSupplier xDrawPagesSupplier = null;
+    private XDrawPagesSupplier xDrawPagesSupplier = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new OpenOffice.org drawing document.
-   * 
-   * @param xDrawPagesSupplier OpenOffice.org API interface of a drawing document
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
-   * 
-   * @author Andreas Bröker
-   */
-  public DrawingDocument(XDrawPagesSupplier xDrawPagesSupplier, PropertyValue[] initialProperties)
-      throws IllegalArgumentException {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xDrawPagesSupplier),
-        initialProperties);
-    this.xDrawPagesSupplier = xDrawPagesSupplier;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org drawing document.
+     * 
+     * @param xDrawPagesSupplier OpenOffice.org API interface of a drawing document
+     * @param initialProperties the properties that were used loading the document
+     * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
+     * @author Andreas Bröker
+     */
+    public DrawingDocument(XDrawPagesSupplier xDrawPagesSupplier, PropertyValue[] initialProperties)
+        throws IllegalArgumentException {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xDrawPagesSupplier ), initialProperties );
+        this.xDrawPagesSupplier = xDrawPagesSupplier;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns OpenOffice.org XDrawPagesSupplier interface.
-   * 
-   * @return OpenOffice.org XDrawPagesSupplier interface
-   * 
-   * @author Andreas Bröker
-   */
-  public XDrawPagesSupplier getDrawPagesSupplier() {
-    return xDrawPagesSupplier;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org XDrawPagesSupplier interface.
+     * 
+     * @return OpenOffice.org XDrawPagesSupplier interface
+     * @author Andreas Bröker
+     */
+    public XDrawPagesSupplier getDrawPagesSupplier() {
+        return xDrawPagesSupplier;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.DRAW;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.DRAW;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Reformats the document.
-   * 
-   * @author Markus Krüger
-   */
-  public void reformat() {
-    //TODO fill with logic
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Reformats the document.
+     * 
+     * @author Markus Krüger
+     */
+    public void reformat() {
+        // TODO fill with logic
+    }
+    // ----------------------------------------------------------------------------
 
 }

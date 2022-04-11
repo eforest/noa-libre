@@ -36,11 +36,11 @@
  */
 package ag.ion.bion.officelayer.internal.text;
 
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.text.IGlobalTextDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.text.XTextDocument;
+
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.text.IGlobalTextDocument;
 
 /**
  * OpenOffice.org global text document.
@@ -51,31 +51,29 @@ import com.sun.star.text.XTextDocument;
  */
 public class GlobalTextDocument extends TextDocument implements IGlobalTextDocument {
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new GlobalTextDocument.
-   * 
-   * @param xTextDocument XTextDocument OpenOffice.org interface to be used
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @author Andreas Bröker
-   * @date 16.03.2006
-   */
-  public GlobalTextDocument(XTextDocument xTextDocument, PropertyValue[] initialProperties) {
-    super(xTextDocument, initialProperties);
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new GlobalTextDocument.
+     * 
+     * @param xTextDocument XTextDocument OpenOffice.org interface to be used
+     * @param initialProperties the properties that were used loading the document
+     * @author Andreas Bröker
+     * @date 16.03.2006
+     */
+    public GlobalTextDocument(XTextDocument xTextDocument, PropertyValue[] initialProperties) {
+        super( xTextDocument, initialProperties );
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.GLOBAL;
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.GLOBAL;
+    }
+    // ----------------------------------------------------------------------------
 
 }

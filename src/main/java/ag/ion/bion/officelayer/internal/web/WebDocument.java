@@ -39,14 +39,14 @@
  */
 package ag.ion.bion.officelayer.internal.web;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.web.IWebDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.lang.XComponent;
 import com.sun.star.text.XTextDocument;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.web.IWebDocument;
 
 /**
  * OpenOffice.org web document.
@@ -57,62 +57,56 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class WebDocument extends AbstractDocument implements IWebDocument {
 
-  private XTextDocument xTextDocument = null;
+    private XTextDocument xTextDocument = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new OpenOffice.org web document.
-   * 
-   * @param xTextDocument OpenOffice.org API interface of a web document
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
-   * 
-   * @author Thomas Renken
-   * @author Andreas Bröker
-   */
-  public WebDocument(XTextDocument xtextDocument, PropertyValue[] initialProperties)
-      throws IllegalArgumentException {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xtextDocument),
-        initialProperties);
-    this.xTextDocument = xtextDocument;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org web document.
+     * 
+     * @param xtextDocument OpenOffice.org API interface of a web document
+     * @param initialProperties the properties that were used loading the document
+     * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
+     * @author Thomas Renken
+     * @author Andreas Bröker
+     */
+    public WebDocument(XTextDocument xtextDocument, PropertyValue[] initialProperties) throws IllegalArgumentException {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xtextDocument ), initialProperties );
+        this.xTextDocument = xtextDocument;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns OpenOffice.org public XTextDocument interface.
-   * 
-   * @return OpenOffice.org XTextDocument interface
-   * 
-   * @author Thomas Renken
-   * @author Andreas Bröker
-   */
-  public XTextDocument getWebDocument() {
-    return xTextDocument;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org public XTextDocument interface.
+     * 
+     * @return OpenOffice.org XTextDocument interface
+     * @author Thomas Renken
+     * @author Andreas Bröker
+     */
+    public XTextDocument getWebDocument() {
+        return xTextDocument;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Thomas Renken
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.WEB;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Thomas Renken
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.WEB;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Reformats the document.
-   * 
-   * @author Andreas Bröker
-   */
-  public void reformat() {
-    //TODO fill with logic
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Reformats the document.
+     * 
+     * @author Andreas Bröker
+     */
+    public void reformat() {
+        // TODO fill with logic
+    }
+    // ----------------------------------------------------------------------------
 
 }

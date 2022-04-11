@@ -114,6 +114,25 @@
 						<goals>
 							<goal>jar</goal>
 						</goals>
+						<configuration>
+  					  	<tags>
+					      <tag>
+					        <name>date</name>
+					        <placement>a</placement>
+					        <head>Last modified:</head>
+					      </tag>
+					      <tag>
+					        <name>created</name>
+					        <placement>a</placement>
+					        <head>Creation date:</head>
+					      </tag>
+					      <tag>
+					        <name>member</name>
+					        <placement>a</placement>
+					        <head>Members:</head>
+					      </tag>
+						</tags>					
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

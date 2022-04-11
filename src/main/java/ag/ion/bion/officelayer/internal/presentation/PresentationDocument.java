@@ -38,15 +38,15 @@
  */
 package ag.ion.bion.officelayer.internal.presentation;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.presentation.IPageService;
-import ag.ion.bion.officelayer.presentation.IPresentationDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.lang.XComponent;
 import com.sun.star.presentation.XPresentationSupplier;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.presentation.IPageService;
+import ag.ion.bion.officelayer.presentation.IPresentationDocument;
 
 /**
  * OpenOffice.org presentation document representation.
@@ -57,75 +57,69 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class PresentationDocument extends AbstractDocument implements IPresentationDocument {
 
-  private XPresentationSupplier xPresentationSupplier = null;
-  private IPageService          pageService           = null;
+    private XPresentationSupplier xPresentationSupplier = null;
+    private IPageService pageService = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new OpenOffice.org presentation document.
-   * 
-   * @param xPresentationSupplier OpenOffice.org interface of a presentation document
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
-   * 
-   * @author Andreas Bröker
-   */
-  public PresentationDocument(XPresentationSupplier xPresentationSupplier,
-      PropertyValue[] initialProperties) throws IllegalArgumentException {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xPresentationSupplier),
-        initialProperties);
-    this.xPresentationSupplier = xPresentationSupplier;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org presentation document.
+     * 
+     * @param xPresentationSupplier OpenOffice.org interface of a presentation document
+     * @param initialProperties the properties that were used loading the document
+     * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
+     * @author Andreas Bröker
+     */
+    public PresentationDocument(XPresentationSupplier xPresentationSupplier, PropertyValue[] initialProperties)
+        throws IllegalArgumentException {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xPresentationSupplier ), initialProperties );
+        this.xPresentationSupplier = xPresentationSupplier;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns OpenOffice.org XPresentationSupplier interface.
-   * 
-   * @return OpenOffice.org XPresentationSupplier interface
-   * 
-   * @author Andreas Bröker
-   */
-  public XPresentationSupplier getPresentationSupplier() {
-    return xPresentationSupplier;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org XPresentationSupplier interface.
+     * 
+     * @return OpenOffice.org XPresentationSupplier interface
+     * @author Andreas Bröker
+     */
+    public XPresentationSupplier getPresentationSupplier() {
+        return xPresentationSupplier;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.IMPRESS;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.IMPRESS;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Reformats the document.
-   * 
-   * @author Markus Krüger
-   */
-  public void reformat() {
-    //TODO fill with logic
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Reformats the document.
+     * 
+     * @author Markus Krüger
+     */
+    public void reformat() {
+        // TODO fill with logic
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns page service of the document.
-   * 
-   * @return page service of the document
-   * 
-   * @author Markus Krüger
-   * @date 07.01.2008
-   */
-  public IPageService getPageService() {
-    if (pageService == null)
-      pageService = new PageService(this);
-    return pageService;
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns page service of the document.
+     * 
+     * @return page service of the document
+     * @author Markus Krüger
+     * @date 07.01.2008
+     */
+    public IPageService getPageService() {
+        if ( pageService == null )
+            pageService = new PageService( this );
+        return pageService;
+    }
+    // ----------------------------------------------------------------------------
 
 }

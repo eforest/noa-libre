@@ -32,7 +32,7 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
@@ -46,206 +46,195 @@ import ag.ion.bion.officelayer.text.ITextTableProperties;
 import ag.ion.bion.officelayer.text.TextException;
 import ag.ion.bion.officelayer.text.table.ITextTablePropertyStore;
 
-
 /**
- * The TextTablePropertyStore. Actually does nothing more than that :
- * get a table and stores its properties (noteably : the proeprties 
- * are not changned
+ * The TextTablePropertyStore. Actually does nothing more than that : get a table and stores its properties (noteably :
+ * the proeprties are not changned
  * 
  * @author Sebastian Rösgen
- * 
  * @version $Revision: 10398 $
  */
 public class TextTablePropertyStore extends AbstractPropertyStore implements ITextTablePropertyStore {
-	
-	private int[] cellWidth = null;
-	private long tableWidth = -1;
-	private int columnCount = -1;
-	private int rowCount = -1;
-	private boolean  repeatHeadline = false;
-	private TextTableColumnsSeparator[] textTableColumnsSeparators = null;
-  private IProperties properties = null;
-	
-  //----------------------------------------------------------------------------
-	/**
-	 * Construcs the texttable property store.
-	 * 
-	 * @param table the table from which to gain the properties
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public TextTablePropertyStore (ITextTable table) throws TextException {
-		getTableAnalyse(table);
-	}
-  //----------------------------------------------------------------------------	
-  /**
-   * Returns the properties.
-   * 
-   * @return the properties
-   * 
-   * @author Markus Krüger
-   */
-  public IProperties getProperties() {
-    return properties;
-  }
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the cell width (this method overwrites previous settings)
-	 * 
-	 * @param width an array containing the individual cell width
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public void setCellWidths(int[] width) {
-		this.cellWidth = width;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the table width (this method overwrites previous settings).
-	 * 
-	 * @param width the table width to be set
-	 */
-	public void setWidth(long width) {
-		tableWidth = width;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the number of rows of this table.
-	 * 
-	 * @param rows the number of rows
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public void setRows(int number) {
-		rowCount = number;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the number of columns in the tables.
-	 * 
-	 * @param number the number of columns to be set to the table
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public void setColumns(int number) {
-		columnCount = number;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the repeat haedline propertie (so this indicates if the headline is
-	 * to be repeated over serveral pages).
-	 * 
-	 * @param repeatHeadline if set to true the headline is repeated otherwise not
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public void setRepeatHeadline(boolean repeatHeadline) throws TextException {
-		this.repeatHeadline = repeatHeadline;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Checks if the headline is to be repeated.
-	 * 
-	 * @return the indicator if the headline is to be repeated
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public boolean repeatHeadline() throws TextException {
-		return this.repeatHeadline;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Gets the width of the cells.
-	 * 
-	 * @return the cell-width set currently to the table. 
-	 *
- 	 * @author Sebastian Rösgen
-	 */
-	public int[] getCellWidths() throws TextException {
-		return cellWidth;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Gets the currently set width of the table,
-	 * 
-	 * @return the width currently set to the table
-	 * 
-	 * @author Sebastian Rösgen 
-	 */
-	public long getWidth() throws TextException {
-		return tableWidth;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Gets the column seperator of the table
-	 * 
-	 * @return the column seperators
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public TextTableColumnsSeparator[] getTableColumnSeparators()
-			throws TextException {
-		return textTableColumnsSeparators;
-	}
-  //----------------------------------------------------------------------------
-	/**
-	 * Sets the column seperators of the table
-	 * 
-	 * @param columnseperators the columnseperators to be set to the table
-	 * 
-	 * @author Sebastian Rösgen
-	 */
-	public void setTableColumnSeparators(
-			TextTableColumnsSeparator[] textTableColumnsSeparators)
-			throws TextException {
-		this.textTableColumnsSeparators = textTableColumnsSeparators;
-	}
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns a count (the number) of the columns in the table.
-   * 
-   * @return the count of the columns of the table if value is -1 then the table can't be build
-   * 
-   * @author Sebastian Rösgen
-   */
-  public int getColumns() {
-  	return this.columnCount;
-  }
-  //----------------------------------------------------------------------------  
-  /**
-   * Get number (count) of rows in the table, "mirrored" by the 
-   * property store.
-   * 
-   * @return the count of the rows of the table if value is -1 then the table can't be build
-   * 
-   * @author Sebastian Rösgen
-   */
-  public int getRows() {
-  	return this.rowCount;
-  }
-  //----------------------------------------------------------------------------
-	/**
-	 * Analyses the table and fills up the store while doing this.
-	 * The information are actually being placed in element variables
-	 * of this class.
-	 * This method is only called once (its part of the creation
-	 * process beein invoked by the constructor call).
-	 * 
-	 * @param table the ITextTable that should be analysed
-	 * 
-	 * @author Sebastian Rösgen   
-	 */
-	private void getTableAnalyse (ITextTable table) throws TextException {
-		ITextTableProperties props = table.getProperties();
-    this.properties = props;
-		this.columnCount = table.getColumnCount();
-		this.rowCount = table.getRowCount();
-		this.tableWidth = props.getWidth();
-		this.cellWidth = props.getCellWidths();
-		this.repeatHeadline = props.repeatHeadline();
-		this.textTableColumnsSeparators = props.getTableColumnSeparators();
-			
-	}
-  //----------------------------------------------------------------------------
+    private int[] cellWidth = null;
+    private long tableWidth = -1;
+    private int columnCount = -1;
+    private int rowCount = -1;
+    private boolean repeatHeadline = false;
+    private TextTableColumnsSeparator[] textTableColumnsSeparators = null;
+    private IProperties properties = null;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Construcs the texttable property store.
+     * 
+     * @param table the table from which to gain the properties
+     * @author Sebastian Rösgen
+     */
+    public TextTablePropertyStore(ITextTable table) throws TextException {
+        getTableAnalyse( table );
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns the properties.
+     * 
+     * @return the properties
+     * @author Markus Krüger
+     */
+    public IProperties getProperties() {
+        return properties;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the cell width (this method overwrites previous settings)
+     * 
+     * @param width an array containing the individual cell width
+     * @author Sebastian Rösgen
+     */
+    public void setCellWidths(int[] width) {
+        this.cellWidth = width;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the table width (this method overwrites previous settings).
+     * 
+     * @param width the table width to be set
+     */
+    public void setWidth(long width) {
+        tableWidth = width;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the number of rows of this table.
+     * 
+     * @param number rows the number of rows
+     * @author Sebastian Rösgen
+     */
+    public void setRows(int number) {
+        rowCount = number;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the number of columns in the tables.
+     * 
+     * @param number the number of columns to be set to the table
+     * @author Sebastian Rösgen
+     */
+    public void setColumns(int number) {
+        columnCount = number;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the repeat haedline propertie (so this indicates if the headline is to be repeated over serveral pages).
+     * 
+     * @param repeatHeadline if set to true the headline is repeated otherwise not
+     * @author Sebastian Rösgen
+     */
+    public void setRepeatHeadline(boolean repeatHeadline) throws TextException {
+        this.repeatHeadline = repeatHeadline;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Checks if the headline is to be repeated.
+     * 
+     * @return the indicator if the headline is to be repeated
+     * @author Sebastian Rösgen
+     */
+    public boolean repeatHeadline() throws TextException {
+        return this.repeatHeadline;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Gets the width of the cells.
+     * 
+     * @return the cell-width set currently to the table.
+     * @author Sebastian Rösgen
+     */
+    public int[] getCellWidths() throws TextException {
+        return cellWidth;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Gets the currently set width of the table,
+     * 
+     * @return the width currently set to the table
+     * @author Sebastian Rösgen
+     */
+    public long getWidth() throws TextException {
+        return tableWidth;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Gets the column seperator of the table
+     * 
+     * @return the column seperators
+     * @author Sebastian Rösgen
+     */
+    public TextTableColumnsSeparator[] getTableColumnSeparators() throws TextException {
+        return textTableColumnsSeparators;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the column seperators of the table
+     * 
+     * @param textTableColumnsSeparators the columnseperators to be set to the table
+     * @author Sebastian Rösgen
+     */
+    public void setTableColumnSeparators(TextTableColumnsSeparator[] textTableColumnsSeparators) throws TextException {
+        this.textTableColumnsSeparators = textTableColumnsSeparators;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns a count (the number) of the columns in the table.
+     * 
+     * @return the count of the columns of the table if value is -1 then the table can't be build
+     * @author Sebastian Rösgen
+     */
+    public int getColumns() {
+        return this.columnCount;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Get number (count) of rows in the table, "mirrored" by the property store.
+     * 
+     * @return the count of the rows of the table if value is -1 then the table can't be build
+     * @author Sebastian Rösgen
+     */
+    public int getRows() {
+        return this.rowCount;
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Analyses the table and fills up the store while doing this. The information are actually being placed in element
+     * variables of this class. This method is only called once (its part of the creation process beein invoked by the
+     * constructor call).
+     * 
+     * @param table the ITextTable that should be analysed
+     * @author Sebastian Rösgen
+     */
+    private void getTableAnalyse(ITextTable table) throws TextException {
+        ITextTableProperties props = table.getProperties();
+        this.properties = props;
+        this.columnCount = table.getColumnCount();
+        this.rowCount = table.getRowCount();
+        this.tableWidth = props.getWidth();
+        this.cellWidth = props.getCellWidths();
+        this.repeatHeadline = props.repeatHeadline();
+        this.textTableColumnsSeparators = props.getTableColumnSeparators();
+
+    }
+    // ----------------------------------------------------------------------------
 }

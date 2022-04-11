@@ -38,14 +38,14 @@
  */
 package ag.ion.bion.officelayer.internal.spreadsheet;
 
-import ag.ion.bion.officelayer.document.AbstractDocument;
-import ag.ion.bion.officelayer.document.IDocument;
-import ag.ion.bion.officelayer.spreadsheet.ISpreadsheetDocument;
-
 import com.sun.star.beans.PropertyValue;
 import com.sun.star.lang.XComponent;
 import com.sun.star.sheet.XSpreadsheetDocument;
 import com.sun.star.uno.UnoRuntime;
+
+import ag.ion.bion.officelayer.document.AbstractDocument;
+import ag.ion.bion.officelayer.document.IDocument;
+import ag.ion.bion.officelayer.spreadsheet.ISpreadsheetDocument;
 
 /**
  * OpenOffice.org calc document.
@@ -55,59 +55,54 @@ import com.sun.star.uno.UnoRuntime;
  */
 public class SpreadsheetDocument extends AbstractDocument implements ISpreadsheetDocument {
 
-  private XSpreadsheetDocument xSpreadsheetDocument = null;
+    private XSpreadsheetDocument xSpreadsheetDocument = null;
 
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new OpenOffice.org scalc document.
-   * 
-   * @param xSpreadsheetDocument OpenOffice.org API interface of a calc document
-   * @param intitialProperties the properties that were used loading the document
-   * 
-   * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
-   * 
-   * @author Andreas Bröker
-   */
-  public SpreadsheetDocument(XSpreadsheetDocument xSpreadsheetDocument,
-      PropertyValue[] initialProperties) throws IllegalArgumentException {
-    super((XComponent) UnoRuntime.queryInterface(XComponent.class, xSpreadsheetDocument),
-        initialProperties);
-    this.xSpreadsheetDocument = xSpreadsheetDocument;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org scalc document.
+     * 
+     * @param xSpreadsheetDocument OpenOffice.org API interface of a calc document
+     * @param initialProperties the properties that were used loading the document
+     * @throws IllegalArgumentException if the submitted OpenOffice.org interface is not valid
+     * @author Andreas Bröker
+     */
+    public SpreadsheetDocument(XSpreadsheetDocument xSpreadsheetDocument, PropertyValue[] initialProperties)
+        throws IllegalArgumentException {
+        super( (XComponent) UnoRuntime.queryInterface( XComponent.class, xSpreadsheetDocument ), initialProperties );
+        this.xSpreadsheetDocument = xSpreadsheetDocument;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns OpenOffice.org XSpreadsheet interface.
-   * 
-   * @return OpenOffice.org XSpreadsheet interface
-   * 
-   * @author Andreas Bröker
-   */
-  public XSpreadsheetDocument getSpreadsheetDocument() {
-    return xSpreadsheetDocument;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org XSpreadsheet interface.
+     * 
+     * @return OpenOffice.org XSpreadsheet interface
+     * @author Andreas Bröker
+     */
+    public XSpreadsheetDocument getSpreadsheetDocument() {
+        return xSpreadsheetDocument;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Returns type of the document.
-   * 
-   * @return type of the document
-   * 
-   * @author Andreas Bröker
-   */
-  public String getDocumentType() {
-    return IDocument.CALC;
-  }
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns type of the document.
+     * 
+     * @return type of the document
+     * @author Andreas Bröker
+     */
+    public String getDocumentType() {
+        return IDocument.CALC;
+    }
 
-  //----------------------------------------------------------------------------
-  /**
-   * Reformats the document.
-   * 
-   * @author Markus Krüger
-   */
-  public void reformat() {
-    //TODO fill with logic
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Reformats the document.
+     * 
+     * @author Markus Krüger
+     */
+    public void reformat() {
+        // TODO fill with logic
+    }
+    // ----------------------------------------------------------------------------
 
 }

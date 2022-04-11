@@ -59,6 +59,6 @@ public interface IDesktopServiceSWT extends IDesktopService {
      * @throws DesktopException if the frame can not be constructed
      * @author Thorsten Behrens
      */
-    public IFrame constructNewOfficeFrame(Composite composite) throws DesktopException;
+    public IFrame constructNewOfficeFrame(Composite container) throws DesktopException;
 
 }

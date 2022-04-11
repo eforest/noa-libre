@@ -26,7 +26,7 @@ public class DesktopServiceSWT extends DesktopService {
      * Constructs new OpenOffice.org frame which is integrated into the submitted SWT container. This method works only
      * on local OpenOffice.org applications.
      * 
-     * @param container SWT container to be used
+     * @param composite SWT container to be used
      * @return new OpenOffice.org frame which is integrated into the submitted SWT container
      * @throws DesktopException if the frame can not be constructed
      * @author Thorsten Behrens

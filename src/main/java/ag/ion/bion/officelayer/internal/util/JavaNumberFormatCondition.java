@@ -32,7 +32,7 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
@@ -46,93 +46,86 @@ package ag.ion.bion.officelayer.internal.util;
  */
 public class JavaNumberFormatCondition {
 
-  /** Logical operator < .*/
-  public static final String LOWER          = "<";
-  /** Logical operator <= .*/
-  public static final String LOWER_EQUALS   = "<=";
-  /** Logical operator > .*/
-  public static final String GREATER        = ">";
-  /** Logical operator >= .*/
-  public static final String GREATER_EQUALS = ">=";
-  /** Logical operator = .*/
-  public static final String EQUALS         = "=";
-  /** Logical operator <> .*/
-  public static final String NOT            = "<>";
-  
-  private String operator = null;
-  
-  private double compareValue = -1;
-  
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs new JavaNumberFormatCondition.
-   * 
-   * @param operator logical operator to be used
-   * @param compareValue compare value to be used
-   * 
-   * @throws IllegalArgumentException if the submitted operator is not valid
-   * 
-   * @author Andreas Bröker
-   */
-  public JavaNumberFormatCondition(String operator, double compareValue) throws IllegalArgumentException {
-    if(!(operator.equals(LOWER) ||
-        operator.equals(LOWER_EQUALS) ||
-        operator.equals(GREATER) ||
-        operator.equals(GREATER_EQUALS) ||
-        operator.equals(EQUALS) ||
-        operator.equals(NOT))) {
-      throw new IllegalArgumentException("Invalid operator submitted.");
+    /** Logical operator &lt; . */
+    public static final String LOWER = "<";
+    /** Logical operator &le; . */
+    public static final String LOWER_EQUALS = "<=";
+    /** Logical operator &gt; . */
+    public static final String GREATER = ">";
+    /** Logical operator &ge; . */
+    public static final String GREATER_EQUALS = ">=";
+    /** Logical operator = . */
+    public static final String EQUALS = "=";
+    /** Logical operator &lt;&gt; . */
+    public static final String NOT = "<>";
+
+    private String operator = null;
+
+    private double compareValue = -1;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new JavaNumberFormatCondition.
+     * 
+     * @param operator logical operator to be used
+     * @param compareValue compare value to be used
+     * @throws IllegalArgumentException if the submitted operator is not valid
+     * @author Andreas Bröker
+     */
+    public JavaNumberFormatCondition(String operator, double compareValue) throws IllegalArgumentException {
+        if ( !( operator.equals( LOWER ) || operator.equals( LOWER_EQUALS ) || operator.equals( GREATER )
+            || operator.equals( GREATER_EQUALS ) || operator.equals( EQUALS ) || operator.equals( NOT ) ) ) {
+            throw new IllegalArgumentException( "Invalid operator submitted." );
+        }
+        this.operator = operator;
+        this.compareValue = compareValue;
     }
-    this.operator = operator;
-    this.compareValue = compareValue;
-  }
-  //----------------------------------------------------------------------------
-  /**
-   * Checks condition against submitted value.
-   * 
-   * @param value value to be used
-   * 
-   * @return result of the condition checking
-   * 
-   * @author Andreas Bröker
-   */
-  public boolean checkCondition(double value) {
-    if(operator.equals(LOWER)) {
-      if(value < compareValue) {
-        return true;
-      }
-      return false;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Checks condition against submitted value.
+     * 
+     * @param value value to be used
+     * @return result of the condition checking
+     * @author Andreas Bröker
+     */
+    public boolean checkCondition(double value) {
+        if ( operator.equals( LOWER ) ) {
+            if ( value < compareValue ) {
+                return true;
+            }
+            return false;
+        }
+        else if ( operator.equals( LOWER_EQUALS ) ) {
+            if ( value <= compareValue ) {
+                return true;
+            }
+            return false;
+        }
+        else if ( operator.equals( GREATER ) ) {
+            if ( value > compareValue ) {
+                return true;
+            }
+            return false;
+        }
+        else if ( operator.equals( GREATER_EQUALS ) ) {
+            if ( value >= compareValue ) {
+                return true;
+            }
+            return false;
+        }
+        else if ( operator.equals( EQUALS ) ) {
+            if ( value >= compareValue ) {
+                return true;
+            }
+            return false;
+        }
+        else {
+            if ( value != compareValue ) {
+                return true;
+            }
+            return false;
+        }
     }
-    else if(operator.equals(LOWER_EQUALS)) {
-      if(value <= compareValue) {
-        return true;
-      }
-      return false;
-    }
-    else if(operator.equals(GREATER)) {
-      if(value > compareValue) {
-        return true;
-      }
-      return false;
-    }
-    else if(operator.equals(GREATER_EQUALS)) {
-      if(value >= compareValue) {
-        return true;
-      }
-      return false;
-    }
-    else if(operator.equals(EQUALS)) {
-      if(value >= compareValue) {
-        return true;
-      }
-      return false;
-    }
-    else {
-      if(value != compareValue) {
-        return true;
-      }
-      return false;
-    }
-  }
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
 }

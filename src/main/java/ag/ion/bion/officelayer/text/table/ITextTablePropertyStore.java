@@ -32,7 +32,7 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
@@ -44,71 +44,62 @@ import ag.ion.bion.officelayer.text.ITextTableProperties;
  * Propertystore for tablecells.
  * 
  * @author Sebastian Rösgen
- * 
  * @version $Revision: 10398 $
  */
 public interface ITextTablePropertyStore extends ITextTableProperties {
 
-  //----------------------------------------------------------------------------
-	 /**
-	  * Sets the cell width , this overwrites the currently 
-	  * stored value.
-	  * 
-	  * @param width
-	  * 
-	  * @throws TextException
-	  * 
-	  * @author Sebastian Rösgen
-	  */
-  public void setCellWidths(int[] width);
-  //----------------------------------------------------------------------------
-	  /**
-	   * Sets the width of the table, this overwrites the currently
-	   * stored value.
-	   * 
-	   * @param width
-	   * 
-	   * @throws TextException
-	   * 
-	   * @author Sebastian Rösgen
-	   */
-  public void setWidth(long width);
-  //----------------------------------------------------------------------------
-  /**
-   * Sets the numbers of rows in the table.
-   * 
-   * @param number
-   * 
-   * @author Sebastian Rösgen
-   */
-  public void setRows(int number);
-  //----------------------------------------------------------------------------
-  /**
-   * Sets the number of columns of the table.
-   * 
-   * @param number
-   * 
-   * @author Sebastian Rösgen
-   */
-  public void setColumns(int number);
-  //----------------------------------------------------------------------------
-  /**
-   * Returns a count (the number) of the columns in the table.
-   * 
-   * @return the count of the columns of the table
-   * 
-   * @author Sebastian Rösgen
-   */
-  public int getColumns();
-  //----------------------------------------------------------------------------  
-  /**
-   * Get number (count) of rows in the table, "mirrored" by the 
-   * property store.
-   * 
-   * @return the count of the rows of the table
-   * 
-   * @author Sebastian Rösgen
-   */
-  public int getRows() ; 
-  //----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the cell width , this overwrites the currently stored value.
+     * 
+     * @param width
+     * @author Sebastian Rösgen
+     */
+    public void setCellWidths(int[] width);
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the width of the table, this overwrites the currently stored value.
+     * 
+     * @param width
+     * @author Sebastian Rösgen
+     */
+    public void setWidth(long width);
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the numbers of rows in the table.
+     * 
+     * @param number
+     * @author Sebastian Rösgen
+     */
+    public void setRows(int number);
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Sets the number of columns of the table.
+     * 
+     * @param number
+     * @author Sebastian Rösgen
+     */
+    public void setColumns(int number);
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns a count (the number) of the columns in the table.
+     * 
+     * @return the count of the columns of the table
+     * @author Sebastian Rösgen
+     */
+    public int getColumns();
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Get number (count) of rows in the table, "mirrored" by the property store.
+     * 
+     * @return the count of the rows of the table
+     * @author Sebastian Rösgen
+     */
+    public int getRows();
+    // ----------------------------------------------------------------------------
 }
