@@ -32,7 +32,7 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
@@ -43,67 +43,69 @@ import java.io.FileInputStream;
 
 import com.sun.star.text.XTextCursor;
 
+import ag.ion.TestProperties;
 import ag.ion.bion.officelayer.application.LocalOfficeApplicationConfiguration;
 import ag.ion.bion.officelayer.clone.CloneDestinationPosition;
-
 import ag.ion.bion.officelayer.document.DocumentDescriptor;
 import ag.ion.bion.officelayer.document.IDocument;
 import ag.ion.bion.officelayer.internal.application.LocalOfficeApplication;
-
-import ag.ion.bion.officelayer.internal.text.TextDocument;
 import ag.ion.bion.officelayer.internal.text.TextRange;
 import ag.ion.bion.officelayer.text.IParagraph;
 import ag.ion.bion.officelayer.text.ITextContentEnumeration;
 import ag.ion.bion.officelayer.text.ITextDocument;
 import ag.ion.bion.officelayer.text.ITextRange;
-
 import junit.framework.TestCase;
 
 /**
- * JUnit test case for the IParagraph and the contained properties
- * IParagprahPropertyStore and ICharacterPropertyStore 
+ * JUnit test case for the IParagraph and the contained properties IParagprahPropertyStore and ICharacterPropertyStore
  * 
  * @author sebastianr
  */
 public class IParagraphTest extends TestCase {
 
-	
-	/**
-	 * Basic test class
-	 *
-	 */
-	public void testGetParagraphText() {
-		try {
-      LocalOfficeApplication localOfficeApplication = new LocalOfficeApplication(null);
-      LocalOfficeApplicationConfiguration configuration = new LocalOfficeApplicationConfiguration();
-      configuration.setApplicationHomePath("/home/Sebastianr/OpenOffice.org1.1.1");
-      localOfficeApplication.setConfiguration(configuration);
-      localOfficeApplication.activate();
-      
-      IDocument document = localOfficeApplication.getDocumentService().loadDocument(new FileInputStream(new File("test/testTexts.sxw")), new DocumentDescriptor());
-			if (document != null) {
-				System.out.println("Loaded document");
-				
-				ITextDocument textDocument = (ITextDocument)document;
-							
-				
-				ITextContentEnumeration textEnumeration = textDocument.getTextService().getText().getTextContentEnumeration();
-				IParagraph[] paragraphs = textEnumeration.getParagraphs();
-				
-				
-				ITextRange newTextRange = textDocument.getViewCursorService().getViewCursor().getStartTextRange();
-				XTextCursor cursor = newTextRange.getXTextRange().getText().createTextCursor();
-				cursor.gotoEnd(false);
-				newTextRange = new TextRange(textDocument, cursor);
-				paragraphs[0].getCloneService().cloneToPosition(new CloneDestinationPosition(newTextRange, newTextRange.getClass()), true, null);
-								
-				textDocument.close();
-        localOfficeApplication.deactivate();
-			}
-		}
-		catch (Exception excep) {
-			excep.printStackTrace();
-		}
-	}	
-	
+    /**
+     * Basic test class
+     */
+    public void testGetParagraphText() {
+        try {
+            LocalOfficeApplication localOfficeApplication = new LocalOfficeApplication( null );
+            LocalOfficeApplicationConfiguration configuration = new LocalOfficeApplicationConfiguration();
+            configuration.setApplicationHomePath( TestProperties.getLibreOfficePath() );
+            localOfficeApplication.setConfiguration( configuration );
+            localOfficeApplication.activate();
+
+            IDocument document = localOfficeApplication
+                                                       .getDocumentService()
+                                                       .loadDocument(
+                                                           new FileInputStream( new File( "test/testTexts.sxw" ) ),
+                                                           new DocumentDescriptor() );
+            if ( document != null ) {
+                System.out.println( "Loaded document" );
+
+                ITextDocument textDocument = (ITextDocument) document;
+
+                ITextContentEnumeration textEnumeration =
+                    textDocument.getTextService().getText().getTextContentEnumeration();
+                IParagraph[] paragraphs = textEnumeration.getParagraphs();
+
+                ITextRange newTextRange = textDocument.getViewCursorService().getViewCursor().getStartTextRange();
+                XTextCursor cursor = newTextRange.getXTextRange().getText().createTextCursor();
+                cursor.gotoEnd( false );
+                newTextRange = new TextRange( textDocument, cursor );
+                paragraphs[0]
+                             .getCloneService()
+                             .cloneToPosition(
+                                 new CloneDestinationPosition( newTextRange, newTextRange.getClass() ),
+                                 true,
+                                 null );
+
+                textDocument.close();
+                localOfficeApplication.deactivate();
+            }
+        }
+        catch ( Exception excep ) {
+            excep.printStackTrace();
+        }
+    }
+
 }
