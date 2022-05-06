@@ -67,6 +67,29 @@
 			<artifactId>officebean</artifactId>
 			<version>${version.libreoffice}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>bootstrap-connector</artifactId>
+		    <version>0.1.1</version>
+		    <exclusions>
+			    <exclusion>
+			      <groupId>org.openoffice</groupId>
+			      <artifactId>ridl</artifactId>
+			    </exclusion>
+			    <exclusion>
+			      <groupId>org.openoffice</groupId>
+			      <artifactId>juh</artifactId>
+			    </exclusion>
+			    <exclusion>
+			      <groupId>org.openoffice</groupId>
+			      <artifactId>unoil</artifactId>
+			    </exclusion>
+			    <exclusion>
+			      <groupId>org.openoffice</groupId>
+			      <artifactId>jurt</artifactId>
+			    </exclusion>
+		    </exclusions>		    
+		</dependency>		
 
 
 		<dependency>

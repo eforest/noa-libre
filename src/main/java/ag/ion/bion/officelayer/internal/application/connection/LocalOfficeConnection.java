@@ -77,8 +77,6 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
     private String host = null;
     private String port = null;
 
-    private boolean useBridge = false;
-
     public boolean hasOfficeConnection() {
         return officeConnection != null;
     }
@@ -108,17 +106,6 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
 
     // ----------------------------------------------------------------------------
     /**
-     * Sets host where Office instance is listening.
-     * 
-     * @param host host where Office instance is listening
-     * @author Andreas Bröker
-     */
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    // ----------------------------------------------------------------------------
-    /**
      * Sets port where Office instance is listening
      * 
      * @param port port where Office instance is listening
@@ -126,28 +113,6 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
      */
     public void setPort(String port) {
         this.port = port;
-    }
-
-    // ----------------------------------------------------------------------------
-    /**
-     * Sets information whether the connection uses a bridge.
-     * 
-     * @param useBridge information whether the connection uses a bridge
-     * @author Andreas Bröker
-     */
-    public void setUseBridge(boolean useBridge) {
-        this.useBridge = useBridge;
-    }
-
-    // ----------------------------------------------------------------------------
-    /**
-     * Returns information whether the connection uses a bridge.
-     * 
-     * @return information whether the connection uses a bridge
-     * @author Andreas Bröker
-     */
-    public boolean usesBridge() {
-        return useBridge;
     }
 
     // ----------------------------------------------------------------------------
@@ -182,19 +147,31 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
                     throw new Exception( "The home path of the office application does not exist." );
             }
 
-            if ( officePath != null )
+            if ( officePath != null ) {
                 System.setProperty( "office.home", officePath ); //$NON-NLS-1$
-            if ( officeProgressMonitor != null )
+            }
+            if ( officeProgressMonitor != null ) {
                 officeProgressMonitor
                                      .beginSubTask(
                                          Messages
                                                  .getString(
                                                      "LocalOfficeConnection_monitor_loading_libraries_message" ) ); //$NON-NLS-1$
+            }
+
             officeConnection = new LocalOfficeConnectionGhost( officeProgressMonitor );
-            if ( officeArguments != null && officeArguments.length > 0 )
+
+            if ( officeArguments != null && officeArguments.length > 0 ) {
                 officeConnection.setOfficeArguments( officeArguments ); // $NON-NLS-1$
-            if ( officeProgressMonitor != null )
+            }
+
+            if ( port != null ) {
+                officeConnection.setPort( port );
+            }
+
+            if ( officeProgressMonitor != null ) {
                 officeProgressMonitor.worked( 1 );
+            }
+
             officeConnection.getComponentContext();
 
             if ( officeProgressMonitor != null ) {
@@ -304,34 +281,6 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
 
     // ----------------------------------------------------------------------------
     /**
-     * Returns host of the connection
-     * 
-     * @return host of the connection
-     * @author Andreas Bröker
-     */
-    public String getHost() {
-        if ( host == null )
-            return "localhost"; //$NON-NLS-1$
-        else
-            return host;
-    }
-
-    // ----------------------------------------------------------------------------
-    /**
-     * Returns port of the connection.
-     * 
-     * @return port of the connection.
-     * @author Andreas Bröker
-     */
-    public String getPort() {
-        if ( port == null )
-            return "local"; //$NON-NLS-1$
-        else
-            return port;
-    }
-
-    // ----------------------------------------------------------------------------
-    /**
      * Constructs new local window for OpenOffice.org.
      * 
      * @param container java AWT container
@@ -393,7 +342,9 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
 
                 if ( LOGGER.isLoggable( Level.FINEST ) )
                     LOGGER.finest( "Creating local office window." );
-                XComponentContext xComponentContext = getXComponentContext();
+
+                getXComponentContext();
+
                 Object object = null;
                 // Create the document frame from UNO window. (<= 6.0 => Task, >= 6.1 => Frame)
                 if ( LOGGER.isLoggable( Level.FINEST ) )

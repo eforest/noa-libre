@@ -32,152 +32,124 @@
  *  info@ion.ag                                                             *
  *                                                                          *
  ****************************************************************************/
- 
+
 /*
  * Last changes made by $Author: andreas $, $Date: 2006-10-04 14:14:28 +0200 (Mi, 04 Okt 2006) $
  */
 package ag.ion.bion.officelayer.application.connection;
 
-import ag.ion.bion.officelayer.event.IEventListener;
-
-import ag.ion.bion.officelayer.runtime.IOfficeProgressMonitor;
-
-import com.sun.star.uno.XComponentContext;
-
 import com.sun.star.lang.XMultiComponentFactory;
 import com.sun.star.lang.XMultiServiceFactory;
+import com.sun.star.uno.XComponentContext;
+
+import ag.ion.bion.officelayer.event.IEventListener;
+import ag.ion.bion.officelayer.runtime.IOfficeProgressMonitor;
 
 /**
- * Connection in order to communicate with an OpenOffice.org 
- * application.
+ * Connection in order to communicate with an OpenOffice.org application.
  * 
  * @author Andreas Bröker
  * @version $Revision: 10398 $
  */
 public interface IOfficeConnection {
-  
-  //----------------------------------------------------------------------------
-  /**
-   * Opens connection to OpenOffice.org.
-   * 
-   * @param officeProgressMonitor office progress monitor to be used
-   * 
-   * @return information whether the connection is available
-   * 
-   * @throws Exception if any error occurs
-   */
-  public boolean openConnection(IOfficeProgressMonitor officeProgressMonitor) throws Exception;	
-  //----------------------------------------------------------------------------
-  /**
-   * Opens connection to OpenOffice.org.
-   * 
-   * @return information whether the connection is available
-   * 
-   * @throws Exception if any error occurs
-   */
-  public boolean openConnection() throws Exception;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns information whether the connection is active.
-   * 
-   * @return information whether the connection is active
-   * 
-   * @author Andreas Bröker
-   */
-  public boolean isConnected();  
-  //----------------------------------------------------------------------------
-  /**
-   * Closes connection to OpenOffice.org.
-   * 
-   * @author Andreas Bröker
-   */
-  public void closeConnection();
-  //----------------------------------------------------------------------------
-  /**
-   * Returns XComponentContext.
-   * 
-   * @return XComponentContext
-   * 
-   * @author Andreas Bröker
-   */
-  public XComponentContext getXComponentContext();
-  //----------------------------------------------------------------------------
-  /**
-   * Returns XMultiServiceFactory.
-   * 
-   * @return XMultiServiceFactory
-   * 
-   * @throws Exception if anything fails
-   * 
-   * @author Andreas Bröker
-   * @author Markus Krüger
-   */
-  public XMultiServiceFactory getXMultiServiceFactory() throws Exception;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns XMultiComponentFactory.
-   * 
-   * @return XMultiComponentFactory
-   * 
-   * @throws Exception if the closed connection could not be opened
-   * 
-   * @author Andreas Bröker
-   * @author Markus Krüger
-   */
-  public XMultiComponentFactory getXMultiComponentFactory() throws Exception;
-  //----------------------------------------------------------------------------
-  /**
-   * Returns host of the connection
-   * 
-   * @return host of the connection
-   * 
-   * @author Andreas Bröker
-   */
-  public String getHost();
-  //----------------------------------------------------------------------------
-  /**
-   * Returns port of the connection.
-   * 
-   * @return port of the connection.
-   * 
-   * @author Andreas Bröker
-   */
-  public String getPort();  
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs service with the XMultiServiceFactory.
-   * 
-   * @param serviceName name of the service
-   * 
-   * @return service object
-   * 
-   * @throws Exception if any error occurs
-   * 
-   * @author Andreas Bröker
-   */
-  public Object createService(String serviceName) throws Exception;
-  //----------------------------------------------------------------------------
-  /**
-   * Constructs service with the XMultiComponentFactory.
-   * 
-   * @param serviceName name of the service
-   * 
-   * @return service object
-   * 
-   * @throws Exception if any error occurs
-   * 
-   * @author Andreas Bröker
-   */
-  public Object createServiceWithContext(String serviceName) throws Exception;
-  //----------------------------------------------------------------------------
-  /**
-   * Adds new listener for the internal XBridge of OpenOffice.org.
-   * 
-   * @param eventListener new event listener
-   * 
-   * @author Andreas Bröker
-   */
-  public void addBridgeEventListener(IEventListener eventListener);
-  //----------------------------------------------------------------------------
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Opens connection to OpenOffice.org.
+     * 
+     * @param officeProgressMonitor office progress monitor to be used
+     * @return information whether the connection is available
+     * @throws Exception if any error occurs
+     */
+    public boolean openConnection(IOfficeProgressMonitor officeProgressMonitor) throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Opens connection to OpenOffice.org.
+     * 
+     * @return information whether the connection is available
+     * @throws Exception if any error occurs
+     */
+    public boolean openConnection() throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns information whether the connection is active.
+     * 
+     * @return information whether the connection is active
+     * @author Andreas Bröker
+     */
+    public boolean isConnected();
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Closes connection to OpenOffice.org.
+     * 
+     * @author Andreas Bröker
+     */
+    public void closeConnection();
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns XComponentContext.
+     * 
+     * @return XComponentContext
+     * @author Andreas Bröker
+     */
+    public XComponentContext getXComponentContext();
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns XMultiServiceFactory.
+     * 
+     * @return XMultiServiceFactory
+     * @throws Exception if anything fails
+     * @author Andreas Bröker
+     * @author Markus Krüger
+     */
+    public XMultiServiceFactory getXMultiServiceFactory() throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns XMultiComponentFactory.
+     * 
+     * @return XMultiComponentFactory
+     * @throws Exception if the closed connection could not be opened
+     * @author Andreas Bröker
+     * @author Markus Krüger
+     */
+    public XMultiComponentFactory getXMultiComponentFactory() throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs service with the XMultiServiceFactory.
+     * 
+     * @param serviceName name of the service
+     * @return service object
+     * @throws Exception if any error occurs
+     * @author Andreas Bröker
+     */
+    public Object createService(String serviceName) throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs service with the XMultiComponentFactory.
+     * 
+     * @param serviceName name of the service
+     * @return service object
+     * @throws Exception if any error occurs
+     * @author Andreas Bröker
+     */
+    public Object createServiceWithContext(String serviceName) throws Exception;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Adds new listener for the internal XBridge of OpenOffice.org.
+     * 
+     * @param eventListener new event listener
+     * @author Andreas Bröker
+     */
+    public void addBridgeEventListener(IEventListener eventListener);
+    // ----------------------------------------------------------------------------
 
 }
