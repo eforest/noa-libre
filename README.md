@@ -36,7 +36,8 @@ SWT becomes an optional dependency, may be used with IDesktopServiceSWT / Deskto
 * Mavenized
 * Build with Java 11
 * Linked to Libreoffice 7.x
-* SWT is optional / Extracted functionality to IDesktopServiceSWT
+* Migrated back to bootstrap-connector
+* SWT support via NativeViewHandle without explicit SWT dependency
 * ApplicationAssistant functionality is mostly deactivated on Windows.
   Need to reimplement registry access first (unfortunately com.github.sarxos:windows-registry-util0.3 is not compatible with Java 9 upwards)
 * Using IOfficeApplication.NOA_NATIVE_LIB_SKIP system property you can skip loading of native libs in NativeView.class (and do it yourself then of course)

@@ -1,3 +1,16 @@
+v4.0.0-cr01:
+ - Ewald Volkert
+	Mavenized
+	Build with Java 11
+	Linked to Libreoffice 7.x
+	Migrated back to bootstrap-connector
+	SWT support via NativeViewHandle without explicit SWT dependency
+	ApplicationAssistant functionality is mostly deactivated on Windows.
+  	Need to reimplement registry access first (unfortunately com.github.sarxos:windows-registry-util0.3 is not compatible with Java 9 upwards)
+	Using IOfficeApplication.NOA_NATIVE_LIB_SKIP system property you can skip loading of native libs in NativeView.class (and do it yourself then of course)
+	Solved "The default package '.' is not permitted by the Import-Package syntax" problem when used with maven-bundle-plugin
+	Removes GPLv3 threat by removing ag.ion.bion.helper.TextHandler. In case you need that functionality, have a look on origin and reimplement it yourself.
+
 v3.0.1-RC1:
  - Thorsten Behrens:
       Remove workaround for embedded window viewing
