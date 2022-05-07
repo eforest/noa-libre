@@ -137,7 +137,7 @@ public interface IDesktopService extends IDisposeable {
      * 
      * <pre>
      * org.eclipse.swt.widgets.Composite container; 
-     * NativeViewHandle.from( () -> container.handle, () -> SystemDependent.SYSTEM_WIN32 )
+     * NativeViewHandle.from( () -&gt; container.handle, () -&gt; SystemDependent.SYSTEM_WIN32 )
      * </pre>
      * 
      * @param nativeViewHandleSupplier native view handle to be used

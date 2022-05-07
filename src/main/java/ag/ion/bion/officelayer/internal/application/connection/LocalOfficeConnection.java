@@ -324,7 +324,7 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
     /**
      * Returns OpenOffice.org frame integrated into the submitted native view.
      * 
-     * @param nativeView native view
+     * @param nativeViewHandleSupplier native view handle
      * @return OpenOffice.org frame integrated into the submitted Java AWT container
      * @author Markus Krüger
      * @date 08.12.2006
