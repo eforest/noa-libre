@@ -62,11 +62,11 @@ public class NativeView extends Canvas {
     /**
      * @member maHandle system window handle
      */
-    public Integer maHandle;
+    public Long maHandle;
     /**
      * @member maSystem info about currently used platform
      */
-    public int maSystem;
+    public short maSystem;
 
     /**
      * JNI interface of this class These two methods are implemented by using JNI mechanismen. The will be used to get
@@ -170,10 +170,10 @@ public class NativeView extends Canvas {
      * 
      * @return the window handle
      */
-    public Integer getHWND() {
+    public long getHWND() {
         if ( maHandle == null ) {
-            maHandle = new Integer( (int) getNativeWindow() );
-            maSystem = getNativeWindowSystemType();
+            maHandle = getNativeWindow();
+            maSystem = (short) getNativeWindowSystemType();
         }
         return maHandle;
     }

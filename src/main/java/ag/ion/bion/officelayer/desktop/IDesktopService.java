@@ -39,9 +39,11 @@
 package ag.ion.bion.officelayer.desktop;
 
 import java.awt.Container;
+import java.util.function.Supplier;
 
 import ag.ion.bion.officelayer.IDisposeable;
 import ag.ion.bion.officelayer.NativeView;
+import ag.ion.bion.officelayer.NativeViewHandle;
 import ag.ion.bion.officelayer.event.IDocumentListener;
 import ag.ion.bion.officelayer.event.ITerminateListener;
 import ag.ion.noa.NOAException;
@@ -127,6 +129,22 @@ public interface IDesktopService extends IDisposeable {
      * @date 08.12.2006
      */
     public IFrame constructNewOfficeFrame(NativeView nativeView) throws DesktopException;
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org frame which uses the submitted native view handles. This method works only on local
+     * OpenOffice.org applications. This can be used to add support for SWT by creating simple supplier like this:
+     * 
+     * <pre>
+     * org.eclipse.swt.widgets.Composite container; 
+     * NativeViewHandle.from( () -> container.handle, () -> SystemDependent.SYSTEM_WIN32 )
+     * </pre>
+     * 
+     * @param nativeViewHandleSupplier native view handle to be used
+     * @return new OpenOffice.org frame which uses the submitted native view
+     * @throws DesktopException if the frame can not be constructed
+     */
+    public IFrame constructNewOfficeFrame(Supplier<NativeViewHandle> nativeViewHandleSupplier) throws DesktopException;
 
     // ----------------------------------------------------------------------------
     /**

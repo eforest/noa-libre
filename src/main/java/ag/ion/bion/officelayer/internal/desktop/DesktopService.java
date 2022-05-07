@@ -40,6 +40,7 @@ package ag.ion.bion.officelayer.internal.desktop;
 
 import java.awt.Container;
 import java.util.Hashtable;
+import java.util.function.Supplier;
 
 import com.sun.star.document.XEventBroadcaster;
 import com.sun.star.frame.XDesktop;
@@ -48,6 +49,7 @@ import com.sun.star.frame.XFrames;
 import com.sun.star.uno.UnoRuntime;
 
 import ag.ion.bion.officelayer.NativeView;
+import ag.ion.bion.officelayer.NativeViewHandle;
 import ag.ion.bion.officelayer.application.connection.IOfficeConnection;
 import ag.ion.bion.officelayer.desktop.DesktopException;
 import ag.ion.bion.officelayer.desktop.IDesktopService;
@@ -284,6 +286,26 @@ public class DesktopService implements IDesktopService {
     public IFrame constructNewOfficeFrame(NativeView nativeView) throws DesktopException {
         if ( officeConnection instanceof LocalOfficeConnection ) {
             XFrame xFrame = ( (LocalOfficeConnection) officeConnection ).getOfficeFrame( nativeView );
+            Frame frame = new Frame( xFrame, officeConnection );
+            return frame;
+        }
+        throw new DesktopException( "New frames can only constructed for local OpenOffice.org applications." );
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Constructs new OpenOffice.org frame which uses the submitted native view handle. This method works only on local
+     * OpenOffice.org applications.
+     * 
+     * @param nativeViewHandleSupplier native view handle to be used
+     * @return new OpenOffice.org frame which uses the submitted native view
+     * @throws DesktopException if the frame can not be constructed
+     * @author Markus Krüger
+     * @date 08.12.2006
+     */
+    public IFrame constructNewOfficeFrame(Supplier<NativeViewHandle> nativeViewHandleSupplier) throws DesktopException {
+        if ( officeConnection instanceof LocalOfficeConnection ) {
+            XFrame xFrame = ( (LocalOfficeConnection) officeConnection ).getOfficeFrame( nativeViewHandleSupplier );
             Frame frame = new Frame( xFrame, officeConnection );
             return frame;
         }

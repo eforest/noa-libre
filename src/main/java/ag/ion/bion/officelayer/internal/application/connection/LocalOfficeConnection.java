@@ -40,6 +40,7 @@ package ag.ion.bion.officelayer.internal.application.connection;
 
 import java.awt.Container;
 import java.io.File;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,6 +56,7 @@ import com.sun.star.uno.UnoRuntime;
 import com.sun.star.uno.XComponentContext;
 
 import ag.ion.bion.officelayer.NativeView;
+import ag.ion.bion.officelayer.NativeViewHandle;
 import ag.ion.bion.officelayer.application.connection.AbstractOfficeConnection;
 import ag.ion.bion.officelayer.runtime.IOfficeProgressMonitor;
 
@@ -300,28 +302,9 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
      * @author Andreas Bröker
      */
     public XFrame getOfficeFrame(final Container container) {
-        if ( hasOfficeConnection() ) {
-            try {
-                // TODO needs to be changed in later version as the dispose listener can be used.
-                if ( !isConnected() )
-                    openConnection();
-
-                if ( LOGGER.isLoggable( Level.FINEST ) )
-                    LOGGER.finest( "Creating local office window." );
-
-                final NativeView nativeView = new NativeView( System.getProperty( "user.dir" ) + "/lib" );
-                container.add( nativeView );
-                return getOfficeFrame( nativeView );
-            }
-            catch ( Exception exception ) {
-                LOGGER.throwing( this.getClass().getName(), "getOfficeFrame", exception );
-                // exception.printStackTrace();
-                return null;
-            }
-        }
-        else {
-            return null;
-        }
+        final NativeView nativeView = new NativeView( System.getProperty( "user.dir" ) + "/lib" );
+        container.add( nativeView );
+        return getOfficeFrame( nativeView );
     }
 
     // ----------------------------------------------------------------------------
@@ -334,6 +317,19 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
      * @date 08.12.2006
      */
     public XFrame getOfficeFrame(NativeView nativeView) {
+        return getOfficeFrame( NativeViewHandle.from( nativeView::getHWND, nativeView::getNativeWindowSystemType ) );
+    }
+
+    // ----------------------------------------------------------------------------
+    /**
+     * Returns OpenOffice.org frame integrated into the submitted native view.
+     * 
+     * @param nativeView native view
+     * @return OpenOffice.org frame integrated into the submitted Java AWT container
+     * @author Markus Krüger
+     * @date 08.12.2006
+     */
+    public XFrame getOfficeFrame(Supplier<NativeViewHandle> nativeViewHandleSupplier) {
         if ( hasOfficeConnection() ) {
             try {
                 // TODO needs to be changed in later version as the dispose listener can be used.
@@ -360,8 +356,10 @@ public class LocalOfficeConnection extends AbstractOfficeConnection {
                 XSystemChildFactory xChildFactory =
                     (XSystemChildFactory) UnoRuntime.queryInterface( XSystemChildFactory.class, xToolkit );
 
-                Integer handle = nativeView.getHWND();
-                short systeme = (short) nativeView.getNativeWindowSystemType();
+                NativeViewHandle nativeViewHandle = nativeViewHandleSupplier.get();
+
+                long handle = nativeViewHandle.getHWND();
+                short systeme = nativeViewHandle.getNativeWindowSystemType();
                 byte[] procID = new byte[0];
 
                 XWindowPeer xWindowPeer = xChildFactory.createSystemChild( (Object) handle, procID, systeme );

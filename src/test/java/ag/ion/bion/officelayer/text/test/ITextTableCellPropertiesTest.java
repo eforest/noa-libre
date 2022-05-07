@@ -111,7 +111,7 @@ public class ITextTableCellPropertiesTest extends TestCase {
             LocalOfficeApplication localOfficeApplication = new LocalOfficeApplication( null );
             LocalOfficeApplicationConfiguration configuration = new LocalOfficeApplicationConfiguration();
             configuration.setApplicationHomePath( TestProperties.getLibreOfficePath() );
-            // configuration.setPort( "8100" );
+            configuration.setPort( "8100" );
             localOfficeApplication.setConfiguration( configuration );
             localOfficeApplication.activate();
             ITextDocument textDocument = (ITextDocument) localOfficeApplication
