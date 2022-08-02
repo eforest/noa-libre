@@ -3,7 +3,7 @@
 
 	<groupId>io.github.eforest</groupId>
 	<artifactId>noa-libre</artifactId>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>4.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>noa-libre</name>
