@@ -3,7 +3,7 @@
 
 	<groupId>io.github.eforest</groupId>
 	<artifactId>noa-libre</artifactId>
-	<version>4.0.1-SNAPSHOT</version>
+	<version>4.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>noa-libre</name>
@@ -39,7 +39,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.libreoffice>7.3.2</version.libreoffice>
+		<version.libreoffice>7.3.5</version.libreoffice>
 
 		<do.skipSource>true</do.skipSource>
 		<do.skipJavadoc>true</do.skipJavadoc>
